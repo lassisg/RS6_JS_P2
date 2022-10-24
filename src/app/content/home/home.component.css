@@ -1,0 +1,25 @@
+/* Carousel styles */
+.hero {
+  max-height: 900px;
+}
+.carousel-caption {
+  bottom: unset;
+}
+.carousel-caption h3 {
+  font-weight: bold;
+  font-size: 57px;
+  color: #fff;
+}
+
+/* Featured styles */
+.featured h2 {
+  font-weight: bolder;
+  font-size: 28px;
+  text-transform: uppercase;
+}
+.featured-item {
+  border: 2px solid transparent;
+}
+.featured-item:hover {
+  border: 2px solid #cd0118;
+}

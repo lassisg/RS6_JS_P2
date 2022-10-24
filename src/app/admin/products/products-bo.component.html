@@ -1,0 +1,217 @@
+<h1>{{ title }}</h1>
+
+<section class="product-form">
+  <!-- TODO: Add file upload? -->
+  <form
+    [formGroup]="formProducts"
+    (ngSubmit)="addOrUpdateProduct()"
+    class="row my-3 ps-2 pb-2"
+  >
+    <div class="row g-2">
+      <label for="name" class="col-1 col-form-label">Produto:</label>
+      <div class="col-11">
+        <input
+          type="text"
+          name="name"
+          id="name"
+          class="form-control"
+          formControlName="name"
+        />
+      </div>
+    </div>
+    <!-- <small
+      *ngIf="
+      formProducts.get('marca')?.touched && formProducts.get('marca')?.invalid
+      "
+      ><span *ngIf="formProducts.get('marca')?.hasError('required')"
+      >Campo de preenchimento obrigatório!</span
+      >
+      <span *ngIf="formProducts.get('marca')?.errors?.['pattern']"
+      >Mínimo 3 caracteres e máx 20 caracteres!</span
+      ></small> -->
+    <div class="row g-2">
+      <label for="brand" class="col-1 col-form-label">Marca:</label>
+      <div class="col-11">
+        <input
+          type="text"
+          name="brand"
+          id="brand"
+          class="form-control"
+          formControlName="brand"
+        />
+      </div>
+    </div>
+
+    <div class="row g-2">
+      <label for="type" class="col-1 col-form-label">Tipo</label>
+      <div class="col-11">
+        <select
+          name="type"
+          id="type"
+          class="form-select"
+          formControlName="product_type"
+        >
+          <option value="" disabled selected>
+            -- Selecionar um tipo de produto --
+          </option>
+          <option *ngFor="let type of productTypes" value="{{ type.name }}">
+            {{ type.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row g-2">
+      <label for="color" class="col-1 col-form-label">Cor:</label>
+      <div class="col-11">
+        <input
+          type="text"
+          name="color"
+          id="color"
+          class="form-control"
+          formControlName="color"
+        />
+      </div>
+    </div>
+
+    <div class="row g-2">
+      <label for="price" class="col-1 col-form-label">Preço:</label>
+      <div class="col-11">
+        <input
+          type="number"
+          name="price"
+          id="price"
+          class="form-control"
+          formControlName="price"
+        />
+      </div>
+    </div>
+
+    <div class="row g-2">
+      <label for="description" class="col-1 col-form-label">Descrição:</label>
+      <div class="col-11">
+        <textarea
+          name="description"
+          id="description"
+          class="form-control"
+          rows="3"
+          formControlName="description"
+        ></textarea>
+      </div>
+    </div>
+
+    <div class="row g-2">
+      <div class="col-1"></div>
+      <div class="col-11 form-check form-switch">
+        <input
+          type="checkbox"
+          role="switch"
+          name="featured"
+          id="featured"
+          class="form-check-input"
+          formControlName="featured"
+        />
+        <label class="form-check-label ms-2" for="featured">Destaque</label>
+      </div>
+    </div>
+
+    <div class="row g-2 text-right">
+      <div class="col"></div>
+      <div class="col-auto">
+        <input
+          type="submit"
+          value="{{ isNew ? 'Inserir' : 'Alterar' }} produto"
+          class="btn btn-primary text-right"
+          [disabled]="formProducts.invalid"
+        />
+      </div>
+    </div>
+  </form>
+</section>
+
+<section class="product-search my-4">
+  <div class="d-flex align-items-center">
+    <label for="pesquisa" class="flex-shrink-0 me-2">Pesquisa:</label>
+    <input
+      type="text"
+      id="pesquisa"
+      class="form-control flex-grow-1 me-2"
+      placeholder="Pesquisa de produto"
+      #searchTerm
+      (input)="searchProduct(searchTerm.value)"
+    />
+    <button class="btn btn-primary flex-shrink-0 me-2">Pesquisa</button>
+    <button class="btn btn-primary flex-shrink-0">Limpar pesquisa</button>
+  </div>
+</section>
+
+<section class="product-list">
+  <h2>Lista de Produtos</h2>
+
+  <p *ngIf="products.length === 0 && searchTerm.value === ''">
+    Não existem carros na base de dados!
+  </p>
+  <p *ngIf="products.length === 0 && searchTerm.value !== ''">
+    Não existem carros com o modelo especificado!
+  </p>
+
+  <table class="table table-light caption-top" *ngIf="products.length !== 0">
+    <caption>
+      Total de produtos:
+      {{
+        products.length
+      }}
+    </caption>
+    <thead class="">
+      <tr>
+        <th class="align-middle"><span>Foto</span></th>
+        <th class="align-middle"><span>Marca</span></th>
+        <th class="align-middle"><span>Produto</span></th>
+        <th class="align-middle"><span>Tipo produto</span></th>
+        <th class="align-middle"><span>Cor</span></th>
+        <th class="align-middle product-price"><span>Preço</span></th>
+        <th class="align-middle"><span>Descrição</span></th>
+        <th class="align-middle"><span>Destaque</span></th>
+        <th class="align-middle"><span>Operações</span></th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <tr *ngFor="let product of products" id="{{ product.id }}">
+        <td class="product-image">
+          <img
+            class="img-thumbnail image-main"
+            src="/assets/{{ product.photo_primary }}"
+            alt=""
+          />
+          <img
+            class="img-thumbnail image-hover"
+            src="/assets/{{ product.photo_secondary }}"
+            alt=""
+          />
+        </td>
+        <td>{{ product.brand }}</td>
+        <td>{{ product.name }}</td>
+        <td>{{ product.product_type }}</td>
+        <td>{{ product.color }}</td>
+        <td class="text-end product-price">{{ product.price }} &euro;</td>
+        <td>{{ product.description }}</td>
+        <td class="text-center">
+          <i *ngIf="product.featured" class="fa fa-check"></i>
+          <i *ngIf="!product.featured" class="fa fa-x"></i>
+        </td>
+        <td class="text-center">
+          <a
+            class="table-action btn btn-light text-danger"
+            (click)="removeProduct(product.id!)"
+            ><i class="fa-regular fa-square-minus"></i
+          ></a>
+          <a
+            class="table-action btn btn-light text-primary"
+            (click)="fillForm(product)"
+            ><i class="fa-regular fa-pen-to-square"></i
+          ></a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>

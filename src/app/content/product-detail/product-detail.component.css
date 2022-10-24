@@ -1,0 +1,11 @@
+.detail h1 {
+  font-weight: bolder;
+}
+.detail .product-price {
+  font-weight: bold;
+  font-size: 1.4em;
+}
+.detail p {
+  font-size: 1.2em;
+  max-width: 660px;
+}

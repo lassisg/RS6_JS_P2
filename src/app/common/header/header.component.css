@@ -1,0 +1,35 @@
+.container {
+  height: 70px;
+}
+nav {
+  height: 100%;
+  z-index: 9999;
+}
+.nav-link > img {
+  height: 70px;
+}
+.nav-link {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.visible {
+  display: block;
+}
+.dropdown-toggle {
+  color: rgba(0, 0, 0, 0.55);
+}
+.dropdown-toggle:hover,
+.action:hover {
+  color: rgba(0, 0, 0, 0.7);
+  background-color: transparent;
+  cursor: pointer;
+}
+.dropdown-toggle::after {
+  content: none;
+}
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+.action:not(.welcome-message) {
+  font-size: 1.5em;
+}

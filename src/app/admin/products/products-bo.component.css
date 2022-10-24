@@ -1,0 +1,40 @@
+/* Component styles */
+h1 {
+  font-weight: bolder;
+}
+h2 {
+  font-weight: bold;
+}
+
+/* Form styles */
+textarea {
+  min-height: 90px;
+}
+.product-price {
+  min-width: 70px;
+}
+
+/* Search styles */
+
+/* Table styles */
+.img-thumbnail {
+  max-height: 200px;
+  min-width: 100px;
+}
+.product-image img.image-hover,
+.product-image:hover img.image-main {
+  display: none;
+}
+.product-image:hover img.image-hover {
+  display: block;
+}
+.table-action.text-danger:hover,
+.table-action.text-primary:hover {
+  color: #fdf5f9 !important;
+}
+.table-action.text-danger:hover {
+  background-color: #bb2d3b;
+}
+.table-action.text-primary:hover {
+  background-color: #0b5ed7;
+}

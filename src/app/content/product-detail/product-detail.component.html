@@ -1,0 +1,20 @@
+<section class="detail px-3">
+  <h1 class="text-center mb-3">{{ product.brand }}</h1>
+  <h2 class="text-center mb-4">{{ product.name }}</h2>
+
+  <div class="product-images text-center my-3">
+    <img
+      class="ms-auto me-4 my-4"
+      src="/assets/{{ product.photo_primary }}"
+      alt="Foto principal de {{ product.name }}"
+    />
+    <img
+      class="ms-4 me-auto my-4"
+      src="/assets/{{ product.photo_secondary }}"
+      alt="Foto secundária de {{ product.name }}"
+    />
+  </div>
+  <h5 class="text-center">{{ product.product_type }} {{ product.color }}</h5>
+  <p class="product-price text-center mx-auto">{{ product.price }} &euro;</p>
+  <p class="text-center mx-auto">{{ product.description }}</p>
+</section>

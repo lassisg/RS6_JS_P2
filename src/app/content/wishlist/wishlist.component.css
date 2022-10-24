@@ -1,0 +1,29 @@
+.wish-list h1 {
+  font-weight: bolder;
+}
+.product-list img {
+  width: 250px;
+}
+.product-info {
+  width: 200px;
+}
+.product-info h4 {
+  font-weight: bold;
+  font-size: 1.4em;
+}
+.product-info p {
+  width: 120px;
+}
+.product-brand {
+  font-size: 1.5em;
+  font-weight: bold;
+  max-width: 80%;
+}
+.product-name {
+  max-width: 60%;
+  font-size: 1.1em;
+}
+.product-price {
+  font-size: 1.5em;
+  font-weight: bold;
+}

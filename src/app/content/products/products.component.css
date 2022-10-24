@@ -1,0 +1,53 @@
+.card-header-red {
+  background-color: #cd0118;
+  color: white;
+  font-size: 1.1em;
+  font-weight: bold;
+}
+.product-image {
+  position: relative;
+  max-width: 250px;
+}
+.product-image img {
+  width: 250px;
+}
+.product-item {
+  position: relative;
+}
+.product-image img.image-hover,
+.product-image:hover img.image-main {
+  display: none;
+}
+.product-image:hover img.image-hover {
+  display: block;
+}
+.product-brand {
+  font-size: 1.5em;
+  font-weight: bold;
+  max-width: 80%;
+}
+.product-name {
+  max-width: 60%;
+  font-size: 1.1em;
+}
+.product-price {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.star {
+  position: absolute;
+  z-index: 9999;
+  top: 0;
+  right: 0;
+}
+.star:hover {
+  cursor: pointer;
+  opacity: 0.55;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.far.fa-star {
+  color: #000;
+}
+.fas.fa-star {
+  color: #cd0118;
+}

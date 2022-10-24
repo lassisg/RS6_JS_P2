@@ -1,0 +1,33 @@
+<section class="hero">
+  <ngb-carousel *ngIf="sliderImages">
+    <ng-template ngbSlide *ngFor="let image of sliderImages">
+      <div class="picsum-img-wrapper">
+        <img
+          [src]="image.image"
+          alt="Banner {{ image.title }}"
+          class="img-fluid"
+        />
+      </div>
+      <div class="carousel-caption top-50 translate-middle-y">
+        <h3>
+          {{ image.title | uppercase }}
+        </h3>
+      </div>
+    </ng-template>
+  </ngb-carousel>
+</section>
+
+<section class="featured my-3">
+  <h2 class="text-center my-3">Destaques</h2>
+  <!-- TODO: Check media queries -->
+  <div class="d-flex flex-row flex-wrap justify-content-evenly">
+    <div *ngFor="let product of featuredProducts" class="featured-item p-2">
+      <a routerLink="product/{{ product.id }}">
+        <img
+          src="/assets/{{ product.photo_primary }}"
+          alt="{{ product.name }}"
+        />
+      </a>
+    </div>
+  </div>
+</section>
