@@ -5,7 +5,7 @@ import { ProductType } from './productType';
 @Injectable({
   providedIn: 'root'
 })
-export class ServProductTypesService {
+export class ProductTypesService {
 
   private urlAPI = "http://localhost:3000/product_types";
 

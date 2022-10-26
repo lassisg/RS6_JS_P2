@@ -3,7 +3,7 @@
     <ng-template ngbSlide *ngFor="let image of sliderImages">
       <div class="picsum-img-wrapper">
         <img
-          [src]="image.image"
+          src="/assets/{{ image.image }}"
           alt="Banner {{ image.title }}"
           class="img-fluid"
         />
@@ -19,7 +19,7 @@
 
 <section class="featured my-3">
   <h2 class="text-center my-3">Destaques</h2>
-  <!-- TODO: Check media queries -->
+  <!-- TODO: Check media queries (bootstrap breakpoints)-->
   <div class="d-flex flex-row flex-wrap justify-content-evenly">
     <div *ngFor="let product of featuredProducts" class="featured-item p-2">
       <a routerLink="product/{{ product.id }}">

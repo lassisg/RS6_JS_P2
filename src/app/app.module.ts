@@ -16,6 +16,8 @@ import { WishlistComponent } from './content/wishlist/wishlist.component';
 import { ProductsBoComponent } from './admin/products/products-bo.component';
 import { UsersComponent } from './admin/users/users.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from './common/login/login.component';
+import { UserComponent } from './shared/user/user.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ProductDetailComponent,
     WishlistComponent,
     ProductsBoComponent,
-    UsersComponent
+    UsersComponent,
+    LoginComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/shared/product';
-import { ServProductsService } from 'src/app/shared/serv-products.service';
+import { ProductsService } from 'src/app/shared/products.service';
 
 @Component({
   selector: 'app-products',
@@ -21,7 +21,7 @@ export class ProductsComponent implements OnInit {
   productOnLoad: number = 6;
   productStep: number = 3;
 
-  constructor(private servProducts: ServProductsService) { }
+  constructor(private servProducts: ProductsService) { }
 
   ngOnInit(): void {
     this.readProductTypeData();

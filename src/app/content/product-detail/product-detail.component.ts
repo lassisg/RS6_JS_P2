@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/shared/product';
-import { ServProductsService } from 'src/app/shared/serv-products.service';
+import { ProductsService } from 'src/app/shared/products.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -14,7 +14,7 @@ export class ProductDetailComponent implements OnInit {
   product!: Product;
   erro: string = '';
 
-  constructor(private activeRoute: ActivatedRoute, private servProducts: ServProductsService) { }
+  constructor(private activeRoute: ActivatedRoute, private servProducts: ProductsService) { }
 
   ngOnInit(): void {
     this.id = Number(this.activeRoute.snapshot.paramMap.get("id"));

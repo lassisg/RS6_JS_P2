@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { Product } from '../shared/product'
+import { Product } from './product'
 
 @Injectable({
   providedIn: 'root'
 })
-export class ServProductsService {
+export class ProductsService {
 
   private urlAPI = "http://localhost:3000/products";
 
@@ -38,10 +38,8 @@ export class ServProductsService {
 
   getProductTypesInUse() {
     let products = this.http.get<Product[]>(this.urlAPI);
-    let productTypes = products.pipe(
-      map(items => items.map(item => item.product_type)))
-
-    return productTypes;
+    return products.pipe(
+      map(items => items.map(item => item.product_type)));
   }
 
   getProductColorsInUse() {

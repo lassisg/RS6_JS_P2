@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/shared/product';
-import { ServProductsService } from 'src/app/shared/serv-products.service';
+import { ProductsService } from 'src/app/shared/products.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ServProductTypesService } from 'src/app/shared/serv-product-types.service';
+import { ProductTypesService } from 'src/app/shared/product-types.service';
 import { ProductType } from 'src/app/shared/productType';
 
 @Component({
@@ -21,7 +21,7 @@ export class ProductsBoComponent implements OnInit {
   productId: number = 0;
   searchTerm: string = '';
 
-  constructor(private servProducts: ServProductsService, private servProductTypes: ServProductTypesService) { }
+  constructor(private servProducts: ProductsService, private servProductTypes: ProductTypesService) { }
 
   ngOnInit(): void {
     this.readProductTypeData();

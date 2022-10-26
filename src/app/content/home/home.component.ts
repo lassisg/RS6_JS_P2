@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/shared/product';
 import { Hero } from './hero';
 import { HEROES } from './heroes';
-import { ServProductsService } from 'src/app/shared/serv-products.service';
+import { ProductsService } from 'src/app/shared/products.service';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -13,11 +13,11 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class HomeComponent implements OnInit {
 
-  sliderImages: Hero[] = HEROES;
+  sliderImages: Hero[] = [...HEROES];
   featuredProducts: Product[] = [];
   erro: string = '';
 
-  constructor(private servProducts: ServProductsService, config: NgbCarouselConfig) {
+  constructor(private servProducts: ProductsService, config: NgbCarouselConfig) {
     config.showNavigationArrows = false;
     config.showNavigationIndicators = false;
     config.pauseOnFocus = false;
@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.sliderImages.forEach(img => img.image = `/assets/${img.image}`);
     this.readData();
   }
 

@@ -1,6 +1,6 @@
 <header class="py-2">
   <div class="container">
-    <nav class="navbar navbar-expand-lg bg-white">
+    <nav class="navbar navbar-expand-lg">
       <div class="position-absolute top-50 start-50 translate-middle">
         <ul class="navbar-nav align-items-center nav-center">
           <!-- <li class="nav-item border-right"> -->
@@ -245,27 +245,79 @@
       </div>
       <div class="position-absolute top-50 end-0 translate-middle-y">
         <ul class="navbar-nav nav-right">
-          <li *ngIf="activeSession" class="p-2 welcome-message">
-            Bem-vindo(a), <span id="username">{{ username }}</span>
-          </li>
-          <li *ngIf="activeSession" class="nav-item action ps-2">
-            <a><i class="fa-solid fa-clipboard-list"></i></a>
-          </li>
-          <li *ngIf="activeSession" class="nav-item action ps-2">
-            <a><i class="fa-regular fa-user"></i></a>
-          </li>
-          <li *ngIf="activeSession" class="nav-item action ps-2">
-            <a><i class="fa-solid fa-arrow-right-from-bracket"></i></a>
+          <li *ngIf="user" class="p-2 welcome-message">
+            Bem-vindo(a), <span id="username">{{ user.name }}</span>
           </li>
 
-          <li *ngIf="!activeSession" class="nav-item action ps-2">
-            <a><i class="fa-solid fa-user-plus"></i></a>
+          <!-- 
+            1. If user is admin, it doesn-t have wishlist
+            2. If user is admin, it needs links to product and user configurations 
+               Admin can edit its own info in the users config page
+               Therefore, in ths case we show a gear icon with dropdown for users and products configuration 
+          -->
+          <li *ngIf="user && isAdministrator" class="nav-item action">
+            <div class="dropdown">
+              <a class="nav-link dropdown-toggle gear"
+                ><i class="fa-solid fa-gear"></i
+              ></a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <a
+                    class="dropdown-item"
+                    routerLink="admin/products"
+                    routerLinkActive="active"
+                    >Gerenciar produtos</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    routerLink="admin/users"
+                    routerLinkActive="active"
+                    >Gerenciar utilizadores</a
+                  >
+                </li>
+              </ul>
+            </div>
           </li>
-          <li *ngIf="!activeSession" class="nav-item action ps-2">
-            <a><i class="fa-solid fa-arrow-right-to-bracket"></i></a>
+
+          <ng-container *ngIf="user && !isAdministrator">
+            <li *ngIf="user" class="nav-item action ps-2">
+              <a routerLink="wishlist" class="text-reset"
+                ><i class="fa-solid fa-clipboard-list"></i
+              ></a>
+            </li>
+            <li *ngIf="user" class="nav-item action ps-2">
+              <a routerLink="user" class="text-reset"
+                ><i class="fa-regular fa-user"></i
+              ></a>
+            </li>
+          </ng-container>
+
+          <li *ngIf="user" class="nav-item action ps-2">
+            <a (click)="logUserOut()"
+              ><i class="fa-solid fa-arrow-right-from-bracket"></i
+            ></a>
+          </li>
+
+          <!-- TODO: Add user register page -->
+          <li *ngIf="!user" class="nav-item action ps-2">
+            <a routerLink="register"><i class="fa-solid fa-user-plus"></i></a>
+          </li>
+          <li *ngIf="!user" class="nav-item action ps-2">
+            <a (click)="toggleLoginForm(true)"
+              ><i class="fa-solid fa-arrow-right-to-bracket"></i
+            ></a>
           </li>
         </ul>
       </div>
     </nav>
   </div>
 </header>
+
+<app-login
+  *ngIf="modalVisible"
+  (loginFormVisible)="toggleLoginForm($event)"
+  (loginData)="logUserIn($event)"
+  [loginError]="!isUserLoggedIn"
+></app-login>

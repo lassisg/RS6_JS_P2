@@ -1,0 +1,113 @@
+#login-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #aaa;
+}
+.close-modal {
+  position: absolute;
+  right: -15px;
+  top: -15px;
+  background-color: #fff;
+  border: 2px solid #aaa;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 2px 2px 5px #000;
+  cursor: pointer;
+  user-select: none;
+}
+.close-modal:hover {
+  color: #fff;
+  background-color: #aaa;
+}
+.close-modal:active {
+  box-shadow: none;
+  right: -17px;
+  top: -13px;
+}
+.modal-body h3 {
+  font-size: 1.75em;
+  margin-bottom: 16px;
+}
+#feedback-message {
+  font-size: 0.9em;
+  margin-bottom: 20px;
+}
+.modal-body input {
+  width: 320px;
+  border-radius: 3px;
+  border: 1px solid #aaa;
+  margin-bottom: 16px;
+  padding: 10px;
+}
+.modal-body input:focus {
+  outline: none;
+}
+.modal-body button {
+  align-self: flex-end;
+  padding: 10px 20px;
+  border-radius: 3px;
+  border: 1px solid #0d6efd;
+  background-color: #0d6efd;
+  color: #fff;
+  cursor: pointer;
+  width: unset;
+}
+.modal-body button:disabled,
+.modal-body button[disabled] {
+  border: 1px solid #999999;
+  background-color: #999999;
+  color: #666666;
+}
+.modal-body button:hover {
+  opacity: 0.8;
+}
+.modal-body button:active {
+  background-color: #fff;
+  color: #0d6efd;
+}
+.modal-body button:focus {
+  outline: none;
+  opacity: 0.8;
+}
+.modal-body button:disabled,
+.modal-body button[disabled],
+.modal-body button[disabled]:hover {
+  opacity: 0.8;
+  border: 1px solid #999999;
+  background-color: #999999;
+  color: #fff;
+  cursor: default;
+}
+
+/* .d-block.modal.fade.show {
+  z-index: 9999 !important;
+} */
+
+/* .modal-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+} */
+/* .modal-body input {
+  margin-bottom: 10px;
+} */
