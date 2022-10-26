@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Role } from '../shared/role';
 import { User } from '../shared/user';
 import { AuthService } from './auth.service';
-
 
 @Injectable({
   providedIn: 'root'
 })
-// export class AuthGuard implements CanActivate, CanActivateChild {
-export class AuthGuard implements CanActivate {
+export class RestrictedGuard implements CanActivate {
 
   user!: User;
   isAdministrator: boolean = false;
@@ -18,6 +17,7 @@ export class AuthGuard implements CanActivate {
 
     this.authService.getUser().subscribe(user => {
       this.user = user;
+      this.isAdministrator = user.role === Role.Admin;
     });
 
   }
@@ -27,6 +27,11 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
     if (this.user) {
+      if (!this.isAdministrator) {
+        this.router.navigate(['']);
+        return false;
+      }
+
       return true;
     }
 
@@ -34,11 +39,5 @@ export class AuthGuard implements CanActivate {
     return false;
 
   }
-
-  // canActivateChild(
-  //   childRoute: ActivatedRouteSnapshot,
-  //   state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-  //   return true;
-  // }
 
 }

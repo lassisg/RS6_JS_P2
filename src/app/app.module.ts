@@ -18,6 +18,7 @@ import { UsersComponent } from './admin/users/users.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './common/login/login.component';
 import { UserComponent } from './shared/user/user.component';
+import { UserRegisterComponent } from './content/user-register/user-register.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { UserComponent } from './shared/user/user.component';
     ProductsBoComponent,
     UsersComponent,
     LoginComponent,
-    UserComponent
+    UserComponent,
+    UserRegisterComponent
   ],
   imports: [
     BrowserModule,
