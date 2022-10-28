@@ -1,20 +1,20 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { Observable } from 'rxjs';
-import { User } from '../shared/user';
+import { User } from '../shared/models/user';
 import { AuthService } from './auth.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
-// export class AuthGuard implements CanActivate, CanActivateChild {
 export class AuthGuard implements CanActivate {
 
-  user!: User;
+  user!: User | null;
   isAdministrator: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private location: Location) {
 
     this.authService.getUser().subscribe(user => {
       this.user = user;
@@ -26,19 +26,16 @@ export class AuthGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    if (this.user) {
+    let routeUserId = Number(route.paramMap.get('id'));
+    let loggedUserId = this.user?.id;
+
+    if (this.user && this.user.active && routeUserId === loggedUserId) {
       return true;
     }
 
-    this.router.navigate(['/home'], { queryParams: { returnUrl: state.url } });
+    this.location.back();
     return false;
 
   }
-
-  // canActivateChild(
-  //   childRoute: ActivatedRouteSnapshot,
-  //   state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-  //   return true;
-  // }
 
 }

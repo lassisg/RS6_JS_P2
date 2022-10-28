@@ -1,6 +1,6 @@
 <div class="row">
   <section class="side-nav col-2">
-    <div class="card">
+    <div class="card mb-3">
       <div class="card-header card-header-red text-center">Tipo</div>
       <div class="card-body">
         <p *ngFor="let productType of productTypes" class="card-text my-1">
@@ -38,7 +38,7 @@
   </section>
 
   <section class="products col-10">
-    <h1 class="text-center">Homem</h1>
+    <h1 class="text-center">{{ title }}</h1>
 
     <p>
       Total de resultados:
@@ -51,14 +51,14 @@
         class="product-image m-2 mx-4"
       >
         <span
-          *ngIf="!product.featured"
-          (click)="toggleStar(product.id, product.featured)"
+          *ngIf="wishlist && !wishlist.product_id.includes(product.id)"
+          (click)="addStar(product.id)"
           class="star px-2 py-1"
           ><i class="far fa-star"></i
         ></span>
         <span
-          *ngIf="product.featured"
-          (click)="toggleStar(product.id, product.featured)"
+          *ngIf="wishlist && wishlist.product_id.includes(product.id)"
+          (click)="addStar(product.id)"
           class="star px-2 py-1"
           ><i class="fas fa-star"></i
         ></span>

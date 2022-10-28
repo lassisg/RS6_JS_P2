@@ -1,1 +1,110 @@
-<p>users works!</p>
+<h1>{{ title }}</h1>
+
+<section class="product-search my-4 row ps-2">
+  <div class="row g-2">
+    <label for="pesquisa" class="col-2 col-form-label">Pesquisa:</label>
+    <div class="col-10">
+      <input
+        type="text"
+        id="pesquisa"
+        class="form-control"
+        placeholder="Pesquisa de utilizadores"
+        #searchTerm
+        (input)="changeSearchTerm(searchTerm.value)"
+      />
+    </div>
+  </div>
+
+  <div class="row g-2">
+    <label class="col-2">Tipo de pesquisa:</label>
+    <div class="col-10">
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="searchType"
+          id="name"
+          value="name"
+          (change)="changeSearchType($event)"
+          #searchType
+          checked
+        />
+        <label class="form-check-label" for="name">Nome</label>
+      </div>
+      <div class="form-check form-check-inline">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="searchType"
+          id="email"
+          value="email"
+          (change)="changeSearchType($event)"
+          #searchType
+        />
+        <label class="form-check-label" for="email">Email</label>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="product-list">
+  <h2>Lista de utilizadores</h2>
+
+  <p *ngIf="users.length === 0 && searchTerm.value === ''">
+    Não existem utilizadores na base de dados!
+  </p>
+  <p *ngIf="users.length === 0 && searchTerm.value !== ''">
+    Não existem utilizadores com o critério especificado!
+  </p>
+
+  <table
+    class="table table-light caption-top table-striped"
+    *ngIf="users.length !== 0"
+  >
+    <caption>
+      Total de utilizadores:
+      {{
+        searchTerm.value.length > 0 ? searchResult.length : users.length
+      }}
+    </caption>
+    <thead>
+      <tr>
+        <th class="align-middle"><span>Nome</span></th>
+        <th class="align-middle"><span>Email</span></th>
+        <th class="text-center align-middle active-user">
+          <span>Ativar/Destivar</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <tr *ngFor="let user of pageUsers" id="{{ user.id }}">
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td class="text-center active-user">
+          <div class="form-check form-switch px-0 position-relative">
+            <input
+              class="form-check-input ms-auto position-absolute left-50 translate-middle-x"
+              type="checkbox"
+              role="switch"
+              id="activeUser"
+              [checked]="user.active"
+              (change)="toggleActive(user)"
+            />
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-end p-2">
+    <ngb-pagination
+      [collectionSize]="
+        searchTerm.value.length > 0 ? searchResult.length : users.length
+      "
+      [(page)]="page"
+      [pageSize]="pageSize"
+      (pageChange)="refreshUsers()"
+    >
+    </ngb-pagination>
+  </div>
+</section>

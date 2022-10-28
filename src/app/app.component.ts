@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, Event, NavigationStart, NavigationEnd, NavigationError } from '@angular/router';
 import { AuthService } from './auth/auth.service';
-import { User } from './shared/user';
+import { User } from './shared/models/user';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +13,9 @@ export class AppComponent {
   title = 'RS6_JS_P2';
   user!: User;
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(
+    private router: Router,
+    private authService: AuthService) {
 
     router.events.subscribe((event: Event) => {
 

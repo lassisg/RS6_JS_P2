@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from 'src/app/shared/product';
-import { ProductsService } from 'src/app/shared/products.service';
+import { Product } from 'src/app/shared/models/product';
+import { ProductsService } from 'src/app/shared/services/products.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -18,10 +18,10 @@ export class ProductDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = Number(this.activeRoute.snapshot.paramMap.get("id"));
-    this.readData();
+    this.readProductData();
   }
 
-  readData() {
+  readProductData() {
     this.servProducts.getProductById(this.id).subscribe({
       next: response => {
         this.product = response.body!;

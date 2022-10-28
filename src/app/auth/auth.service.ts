@@ -4,8 +4,8 @@ import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { User } from '../shared/user';
-import { Role } from '../shared/role';
+import { User } from '../shared/models/user';
+import { Role } from '../shared/models/role';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class AuthService {
 
   private urlAPI = `${environment.apiUrl}/users`;
 
-  private userSubject = new BehaviorSubject<User>(
+  private userSubject = new BehaviorSubject<User | null>(
     JSON.parse(localStorage.getItem('user')!));
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -23,14 +23,14 @@ export class AuthService {
     this.userSubject.next(user);
   }
 
-  getUser(): Observable<User> {
+  getUser(): Observable<User | null> {
     return this.userSubject.asObservable();
   }
 
   login(email: string, password: string) {
 
     return this.http.get<User[]>(
-      `${this.urlAPI}?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`,
+      `${this.urlAPI}?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}&active=true`,
       { observe: 'response' })
       .pipe(map(user => {
         localStorage.setItem('user', JSON.stringify(user.body?.at(0)!));
@@ -46,7 +46,10 @@ export class AuthService {
   }
 
   isAdmin() {
-    return this.userSubject && this.userSubject.pipe(map(u => u.role === Role.Admin));
+    // FIXME: 7. Error when isAdmin returns null
+    return this.userSubject && this.userSubject.pipe(map(u => u!.role === Role.Admin));
+    // return this.userSubject.getValue() && this.userSubject.pipe(map(u => u!.role === Role.Admin));
+
   }
 
 }

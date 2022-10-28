@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/shared/product';
+import { Product } from 'src/app/shared/models/product';
 import { Hero } from './hero';
 import { HEROES } from './heroes';
-import { ProductsService } from 'src/app/shared/products.service';
+import { ProductsService } from 'src/app/shared/services/products.service';
 import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({

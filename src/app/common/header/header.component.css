@@ -33,6 +33,7 @@ nav {
 .action:not(.welcome-message) {
   font-size: 1.5em;
 }
+.action > *,
 .gear {
   color: rgb(33, 37, 41);
 }

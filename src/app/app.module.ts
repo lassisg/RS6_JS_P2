@@ -9,16 +9,17 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
 import { HomeComponent } from './content/home/home.component';
-import { ErrorComponent } from './common/error/error.component';
+import { ErrorComponent } from './error/error.component';
 import { ProductsComponent } from './content/products/products.component';
 import { ProductDetailComponent } from './content/product-detail/product-detail.component';
 import { WishlistComponent } from './content/wishlist/wishlist.component';
 import { ProductsBoComponent } from './admin/products/products-bo.component';
 import { UsersComponent } from './admin/users/users.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LoginComponent } from './common/login/login.component';
-import { UserComponent } from './shared/user/user.component';
+import { LoginComponent } from './content/login/login.component';
+import { UserComponent } from './content/user/user.component';
 import { UserRegisterComponent } from './content/user-register/user-register.component';
+import { AlertComponent } from './common/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { UserRegisterComponent } from './content/user-register/user-register.com
     UsersComponent,
     LoginComponent,
     UserComponent,
-    UserRegisterComponent
+    UserRegisterComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +47,7 @@ import { UserRegisterComponent } from './content/user-register/user-register.com
     NgbModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [LoginComponent]
 })
 export class AppModule { }

@@ -1,0 +1,10 @@
+h1 {
+  font-weight: bolder;
+}
+th,
+td {
+  width: 40%;
+}
+td.active-user {
+  width: 20%;
+}

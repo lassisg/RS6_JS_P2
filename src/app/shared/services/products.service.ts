@@ -1,17 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
-import { Product } from './product'
+import { environment } from 'src/environments/environment';
+import { Product } from '../models/product'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductsService {
 
-  private urlAPI = "http://localhost:3000/products";
+  private urlAPI = `${environment.apiUrl}/products`;
 
   constructor(private http: HttpClient) { }
-
 
   addProduct(product: Product) {
     return this.http.post<Product>(this.urlAPI, product);
@@ -31,7 +31,7 @@ export class ProductsService {
     return this.http.put<Product>(`${this.urlAPI}/${productId}`, product);
   }
 
-  // TODO: Propagate delete, removing from wishlists
+  // TODO: 4. Propagate delete, removing from wishlists
   deleteProduct(id: number) {
     return this.http.delete<Product>(`${this.urlAPI}/${id}`);
   }
@@ -62,10 +62,9 @@ export class ProductsService {
       { observe: 'response' });
   }
 
-  // FIXME: Add to wishlist, not to featured
-  getWishlistedProducts() {
+  searchProducts(searchParam: string, searchTerm: string) {
     return this.http.get<Product[]>(
-      `${this.urlAPI}?featured_like=true`,
+      `${this.urlAPI}?${searchParam}_like=${searchTerm}`,
       { observe: 'response' });
   }
 

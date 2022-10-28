@@ -1,6 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/shared/product';
-import { ProductsService } from 'src/app/shared/products.service';
+import { first } from 'rxjs/operators';
+import { AuthService } from 'src/app/auth/auth.service';
+import { Product } from 'src/app/shared/models/product';
+import { ProductsService } from 'src/app/shared/services/products.service';
+import { ServWishlistService } from 'src/app/shared/services/wishlist.service';
+import { User } from 'src/app/shared/models/user';
+import { Wishlist } from 'src/app/shared/models/wishlist';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AlertComponent } from 'src/app/common/alert/alert.component';
+import { AlertType } from 'src/app/shared/models/alert-type';
 
 @Component({
   selector: 'app-products',
@@ -9,11 +17,16 @@ import { ProductsService } from 'src/app/shared/products.service';
 })
 export class ProductsComponent implements OnInit {
 
+  title: string = "Homem";
+
+  user!: User | null;
+  isAdministrator: boolean = false;
   products: Product[] = [];
-  filteredProducts: Product[] = [];
   productCount: number = 0;
   productTypes = new Set();
   productColors = new Set();
+  wishlist!: Wishlist;
+  filteredProducts: Product[] = [];
   filterColorQuery: string[] = [];
   filterTypeQuery: string[] = [];
   activeFilter: boolean = false;
@@ -21,12 +34,27 @@ export class ProductsComponent implements OnInit {
   productOnLoad: number = 6;
   productStep: number = 3;
 
-  constructor(private servProducts: ProductsService) { }
+  constructor(private modalService: NgbModal, private servProducts: ProductsService, private authService: AuthService, private servWishlist: ServWishlistService) {
+    this.authService.getUser().subscribe(user => {
+      this.user = user;
+      this.checkAdminRole();
+    });
+  }
 
   ngOnInit(): void {
     this.readProductTypeData();
     this.readProductColorData()
-    this.readData(0, this.productOnLoad);
+    this.readProductData(0, this.productOnLoad);
+    this.readWishlistData();
+  }
+
+  readWishlistData() {
+    this.servWishlist.getWishlistByUserId(this.user!.id)
+      .subscribe({
+        next: response => {
+          this.wishlist = response.body![0];
+        }
+      });
   }
 
   readProductTypeData() {
@@ -47,7 +75,7 @@ export class ProductsComponent implements OnInit {
       });
   }
 
-  readData(start: number, end: number) {
+  readProductData(start: number, end: number) {
 
     this.servProducts
       .getNextProducts(start, end)
@@ -73,19 +101,31 @@ export class ProductsComponent implements OnInit {
   getNext() {
 
     if (this.products.length < this.productCount) {
-      this.readData(this.products.length, this.products.length + this.productStep);
+      this.readProductData(this.products.length, this.products.length + this.productStep);
     }
 
   }
 
-  // FIXME: Add to wishlist, not to featured
-  // TODO: If user logged, add to user's whishlist
-  // Otherwise, save to LocalStorage for late sync (when logged)
-  toggleStar(id: number, featured: boolean) {
-    let productToUpdate = this.products.find(product => product.id === id);
-    productToUpdate!.featured = !featured;
+  addStar(id: number) {
 
-    this.servProducts.updateProduct(productToUpdate!.id, productToUpdate!).subscribe({
+    if (this.isAdministrator) {
+      this.showModal("Administradores não possuem wishlist.", AlertType.Info);
+      return;
+    }
+
+    if (!this.user) {
+      this.showModal("É preciso estar autenticado para usar a wishlist.", AlertType.Info);
+      return;
+    }
+
+    if (this.wishlist.product_id.includes(id)) {
+      this.showModal("Produto já está na wishlist.", AlertType.Warning);
+      return;
+    }
+
+    this.wishlist.product_id.push(id);
+
+    this.servWishlist.updateWishlist(this.wishlist.id, this.wishlist).subscribe({
       next: resultado => {
         console.log(`Produto editado! Id: ${resultado.id}`);
       },
@@ -96,7 +136,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  // TODO: Improve method
+  // TODO: 8. Improve method
   filterProducts(event: any) {
 
     let currentCheckboxStatus = event.target.checked;
@@ -150,6 +190,18 @@ export class ProductsComponent implements OnInit {
       this.filteredProducts = this.filteredProducts.filter(p => this.filterColorQuery.includes(p.color));
     }
 
+  }
+
+  checkAdminRole() {
+    this.authService.isAdmin()!
+      .pipe(first()).subscribe(isAdmin => {
+        this.isAdministrator = isAdmin;
+      });
+  }
+
+  showModal(alertMessage: string, alertType: AlertType) {
+    const modalRef = this.modalService.open(AlertComponent);
+    modalRef.componentInstance.setAlertType(alertType, alertMessage);
   }
 
 }

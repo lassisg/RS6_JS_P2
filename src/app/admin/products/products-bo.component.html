@@ -1,7 +1,7 @@
 <h1>{{ title }}</h1>
 
 <section class="product-form">
-  <!-- TODO: Add file upload? -->
+  <!-- TODO: 5. Add file upload? -->
   <form
     [formGroup]="formProducts"
     (ngSubmit)="addOrUpdateProduct()"
@@ -19,6 +19,7 @@
         />
       </div>
     </div>
+    <!-- TODO: 3. Show visual cues on validation -->
     <!-- <small
       *ngIf="
       formProducts.get('marca')?.touched && formProducts.get('marca')?.invalid
@@ -149,17 +150,20 @@
   <h2>Lista de Produtos</h2>
 
   <p *ngIf="products.length === 0 && searchTerm.value === ''">
-    Não existem carros na base de dados!
+    Não existem produtos na base de dados!
   </p>
   <p *ngIf="products.length === 0 && searchTerm.value !== ''">
-    Não existem carros com o modelo especificado!
+    Não existem produtos com o critério especificado!
   </p>
 
-  <table class="table table-light caption-top" *ngIf="products.length !== 0">
+  <table
+    class="table table-light caption-top"
+    *ngIf="pageProducts.length !== 0"
+  >
     <caption>
       Total de produtos:
       {{
-        products.length
+        searchTerm.value.length > 0 ? searchResult.length : products.length
       }}
     </caption>
     <thead class="">
@@ -176,7 +180,7 @@
       </tr>
     </thead>
     <tbody class="table-group-divider">
-      <tr *ngFor="let product of products" id="{{ product.id }}">
+      <tr *ngFor="let product of pageProducts" id="{{ product.id }}">
         <td class="product-image">
           <img
             class="img-thumbnail image-main"
@@ -214,4 +218,16 @@
       </tr>
     </tbody>
   </table>
+
+  <div class="d-flex justify-content-end p-2">
+    <ngb-pagination
+      [collectionSize]="
+        searchTerm.value.length > 0 ? searchResult.length : products.length
+      "
+      [(page)]="page"
+      [pageSize]="pageSize"
+      (pageChange)="refreshProducts()"
+    >
+    </ngb-pagination>
+  </div>
 </section>

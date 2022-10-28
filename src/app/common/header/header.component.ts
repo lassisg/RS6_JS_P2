@@ -1,7 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AuthService } from 'src/app/auth/auth.service';
 import { first } from 'rxjs/operators';
-import { User } from 'src/app/shared/user';
+import { User } from 'src/app/shared/models/user';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from '../../content/login/login.component';
 
 @Component({
   selector: 'app-header',
@@ -11,14 +13,11 @@ import { User } from 'src/app/shared/user';
 export class HeaderComponent implements OnInit {
   @Output() loginFormVisible: EventEmitter<boolean> = new EventEmitter();
 
-  isUserLoggedIn: boolean = false;
   isAdministrator: boolean = false;
-  authFail: boolean = false;
-  modalVisible: boolean = false;
-  user!: User;
+  user!: User | null;
   erro: string = '';
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private modalService: NgbModal) {
 
     this.authService.getUser().subscribe(user => {
       this.user = user;
@@ -30,43 +29,28 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  toggleLoginForm(visible: boolean) {
-    this.modalVisible = visible;
+  logUserOut() {
+    this.authService.logout();
   }
 
-  logUserIn(user: User) {
+  openLoginForm() {
+    const modalRef = this.modalService.open(LoginComponent);
+    modalRef.componentInstance.user = this.user;
+  }
 
-    this.authService.login(user.email, user.password)
+  checkAdminRole() {
+
+    this.authService.isAdmin()
+      .pipe(first())
       .subscribe({
-        next: response => {
-          this.user = response.body?.at(0)!;
-
-          if (this.user) {
-            this.checkAdminRole();
-            this.toggleLoginForm(false);
-
-          } else {
-            this.authFail = true;
-            setTimeout(() => this.authFail = false, 3000)
-
-          }
+        next: isAdmin => {
+          this.isAdministrator = isAdmin;
         },
         error: error => {
           console.log("Ocorreu um erro!" + error);
           this.erro = error;
 
         }
-      });
-  }
-
-  logUserOut() {
-    this.authService.logout();
-  }
-
-  checkAdminRole() {
-    this.authService.isAdmin()
-      .pipe(first()).subscribe(isAdmin => {
-        this.isAdministrator = isAdmin;
       });
   }
 
