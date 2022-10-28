@@ -12,6 +12,10 @@ export class ServWishlistService {
 
   constructor(private http: HttpClient) { }
 
+  getAllWishlists() {
+    return this.http.get<Wishlist[]>(this.urlAPI, { observe: 'response' });
+  }
+
   getWishlistByUserId(id: number) {
     return this.http.get<Wishlist[]>(
       `${this.urlAPI}?user_id_like=${id}`,
@@ -20,6 +24,14 @@ export class ServWishlistService {
 
   updateWishlist(id: number, wishlist: Wishlist) {
     return this.http.put<Wishlist>(`${this.urlAPI}/${id}`, wishlist);
+  }
+
+  deleteWishlistMissingProduct(productId: number) {
+    this.getAllWishlists().subscribe({
+      next: response => {
+        console.log(response);
+      }
+    });
   }
 
 }

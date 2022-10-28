@@ -136,7 +136,7 @@ export class ProductsComponent implements OnInit {
     });
   }
 
-  // TODO: 8. Improve method
+  // TODO: 5. Improve method
   filterProducts(event: any) {
 
     let currentCheckboxStatus = event.target.checked;

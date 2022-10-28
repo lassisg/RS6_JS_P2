@@ -70,7 +70,7 @@ export class ProductsBoComponent implements OnInit {
       price: new FormControl('', {
         validators: [
           Validators.required,
-          Validators.min(0)]
+          Validators.min(1)]
       }),
       description: new FormControl('', {
         validators: [
@@ -181,9 +181,14 @@ export class ProductsBoComponent implements OnInit {
     this.servProducts.deleteProduct(id).subscribe({
       next: () => {
         console.log(`'${productName}' eliminado`);
+        this.removeProductFromWishlists(id);
         this.readProductData();
       }
     });
+  }
+
+  removeProductFromWishlists(id: number) {
+
   }
 
   fillForm(product: Product) {

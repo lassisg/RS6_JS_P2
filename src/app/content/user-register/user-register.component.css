@@ -1,3 +1,19 @@
 .user-form {
   max-width: 720px;
 }
+.user-form {
+  max-width: 720px;
+}
+.invalid {
+  border-color: #dc3545;
+  box-shadow: none;
+}
+.invalid-feedback {
+  display: block;
+  font-size: 12px;
+  color: #dc3545;
+}
+.col-form-label:after {
+  content: "*";
+  color: #dc3545;
+}

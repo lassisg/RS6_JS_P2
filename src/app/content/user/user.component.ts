@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Role } from 'src/app/shared/models/role';
-import { Location } from '@angular/common';
 import { UsersService } from 'src/app/shared/services/users.service';
 import { User } from 'src/app/shared/models/user';
 import { ActivatedRoute } from '@angular/router';
@@ -23,7 +21,6 @@ export class UserComponent implements OnInit {
   constructor(private authService: AuthService, private servUser: UsersService, private activeRoute: ActivatedRoute) {
     this.authService.getUser().subscribe(user => {
       this.user = user;
-      // this.checkAdminRole();
     });
   }
 

@@ -46,7 +46,7 @@ export class AuthService {
   }
 
   isAdmin() {
-    // FIXME: 7. Error when isAdmin returns null
+    // FIXME: 4. Error when isAdmin returns null
     return this.userSubject && this.userSubject.pipe(map(u => u!.role === Role.Admin));
     // return this.userSubject.getValue() && this.userSubject.pipe(map(u => u!.role === Role.Admin));
 
