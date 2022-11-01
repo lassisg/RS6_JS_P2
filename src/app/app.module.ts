@@ -16,10 +16,10 @@ import { WishlistComponent } from './content/wishlist/wishlist.component';
 import { ProductsBoComponent } from './admin/products/products-bo.component';
 import { UsersComponent } from './admin/users/users.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { LoginComponent } from './content/login/login.component';
+import { LoginComponent } from './components/login/login.component';
 import { UserComponent } from './content/user/user.component';
 import { UserRegisterComponent } from './content/user-register/user-register.component';
-import { AlertComponent } from './common/alert/alert.component';
+import { AlertComponent } from './components/alert/alert.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 @NgModule({

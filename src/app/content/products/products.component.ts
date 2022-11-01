@@ -7,7 +7,7 @@ import { ServWishlistsService } from 'src/app/shared/services/wishlists.service'
 import { User } from 'src/app/shared/models/user';
 import { Wishlist } from 'src/app/shared/models/wishlist';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AlertComponent } from 'src/app/common/alert/alert.component';
+import { AlertComponent } from 'src/app/components/alert/alert.component';
 import { AlertType } from 'src/app/shared/models/alert-type';
 
 @Component({

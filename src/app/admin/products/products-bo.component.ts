@@ -6,7 +6,7 @@ import { ProductTypesService } from 'src/app/shared/services/product-types.servi
 import { ProductType } from 'src/app/shared/models/product-type';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertType } from 'src/app/shared/models/alert-type';
-import { AlertComponent } from 'src/app/common/alert/alert.component';
+import { AlertComponent } from 'src/app/components/alert/alert.component';
 import { ServWishlistsService } from 'src/app/shared/services/wishlists.service';
 
 @Component({
@@ -178,6 +178,12 @@ export class ProductsBoComponent implements OnInit {
   }
 
   // TODO: 3. Show modal before execution
+  confirmRemoval(id: number) {
+    let productName = this.products.find(p => p.id === id)?.name;
+    // If confirm, remove
+    // Else, return
+  }
+
   removeProduct(id: number) {
     let productName = this.products.find(p => p.id === id)?.name;
     this.servProducts.deleteProduct(id).subscribe({

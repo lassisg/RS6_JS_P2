@@ -3,7 +3,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { first } from 'rxjs/operators';
 import { User } from 'src/app/shared/models/user';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { LoginComponent } from '../../content/login/login.component';
+import { LoginComponent } from '../../components/login/login.component';
 
 @Component({
   selector: 'app-header',
