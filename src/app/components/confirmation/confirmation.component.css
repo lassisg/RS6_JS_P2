@@ -1,0 +1,18 @@
+.card {
+  border: none;
+}
+.image-hover {
+  display: none;
+}
+.product-image:hover .image-hover {
+  display: block;
+}
+.product-image:hover .image-main {
+  display: none;
+}
+.btn.btn-danger {
+  background-color: #dc3545;
+}
+.btn.btn-danger:hover {
+  opacity: 0.7;
+}

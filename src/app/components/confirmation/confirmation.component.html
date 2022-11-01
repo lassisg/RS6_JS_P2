@@ -1,1 +1,71 @@
-<p>confirmation works!</p>
+<div class="modal-header">
+  <h4 class="modal-title">{{ formTitle }}</h4>
+  <button
+    type="button"
+    class="btn-close"
+    aria-label="Close"
+    (click)="activeModal.dismiss('Cross click')"
+  >
+    <span aria-hidden="true"></span>
+  </button>
+</div>
+
+<div class="modal-body">
+  <div class="card mb-3">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <div class="product-image">
+          <img
+            class="img-fluid rounded-start image-main"
+            src="/assets/{{ product.photo_primary }}"
+            alt=""
+          />
+          <img
+            class="img-fluid rounded-start image-hover"
+            src="/assets/{{ product.photo_secondary }}"
+            alt=""
+          />
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">
+            <strong>{{ product.brand }}</strong>
+          </p>
+          <p class="card-text">{{ product.description }}</p>
+          <hr />
+          <p class="card-text">
+            Tpo: <span class="text-muted">{{ product.product_type }}</span>
+          </p>
+          <p class="card-text">
+            Cor: <span class="text-muted">{{ product.color }}</span>
+          </p>
+          <p class="card-text">
+            Preço: <span class="text-muted">{{ product.price }}</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <button
+    type="submit"
+    class="btn btn-outline-primary"
+    id="btCancel"
+    ngbAutofocus
+    (click)="activeModal.dismiss()"
+  >
+    Cancelar
+  </button>
+  <button
+    type="submit"
+    class="btn btn-danger"
+    id="btConfirm"
+    (click)="confirmProductRemoval()"
+  >
+    Confirmar
+  </button>
+</div>

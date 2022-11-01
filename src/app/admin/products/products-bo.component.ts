@@ -8,6 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertType } from 'src/app/shared/models/alert-type';
 import { AlertComponent } from 'src/app/components/alert/alert.component';
 import { ServWishlistsService } from 'src/app/shared/services/wishlists.service';
+import { ConfirmationComponent } from 'src/app/components/confirmation/confirmation.component';
 
 @Component({
   selector: 'app-products-bo',
@@ -33,6 +34,8 @@ export class ProductsBoComponent implements OnInit {
   page: number = 1;
   pageSize: number = 10;
   pageProducts: Product[] = [];
+
+  productToRemove: string = "";
 
   constructor(private servProducts: ProductsService, private servProductTypes: ProductTypesService, private servWishlists: ServWishlistsService, private modalService: NgbModal) {
   }
@@ -177,20 +180,27 @@ export class ProductsBoComponent implements OnInit {
       });
   }
 
-  // TODO: 3. Show modal before execution
   confirmRemoval(id: number) {
-    let productName = this.products.find(p => p.id === id)?.name;
-    // If confirm, remove
-    // Else, return
+    this.productToRemove = this.products.find(p => p.id === id)?.name!;
+
+    const modalRef = this.modalService.open(ConfirmationComponent, {
+      size: 'lg'
+    });
+    modalRef.componentInstance.productId = id;
+    modalRef.result.then((positive_result) => {
+      this.removeProduct(id);
+    }, (cancelled_result) => {
+      this.showModal(`${this.productToRemove} não removido`, AlertType.Info);
+    }
+    );
   }
 
   removeProduct(id: number) {
-    let productName = this.products.find(p => p.id === id)?.name;
     this.servProducts.deleteProduct(id).subscribe({
       next: () => {
-        console.log(`'${productName}' eliminado`);
         this.servWishlists.updateWishlistAfterProductRemoval(id);
         this.readProductData();
+        this.showModal(`${this.productToRemove} removido`, AlertType.Success);
       }
     });
   }

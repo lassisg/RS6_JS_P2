@@ -28,16 +28,13 @@ export class RestrictedGuard implements CanActivate {
 
     if (this.user && this.user.active) {
       if (!this.isAdministrator) {
-        console.log('no if');
         this.router.navigate(['']);
         return false;
       }
 
-      console.log('no if de fora');
       return true;
     }
 
-    console.log('fora do if');
     this.router.navigate(['/home'], { queryParams: { returnUrl: state.url } });
     return false;
 

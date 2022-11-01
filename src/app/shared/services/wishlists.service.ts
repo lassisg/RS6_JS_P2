@@ -33,9 +33,9 @@ export class ServWishlistsService {
 
         wishlists?.forEach(wishlist => {
           wishlist.product_id = wishlist.product_id.filter(id => id !== productId);
-          console.log(wishlist);
           this.updateWishlist(wishlist.id, wishlist).subscribe();
         });
+
       }
     });
   }

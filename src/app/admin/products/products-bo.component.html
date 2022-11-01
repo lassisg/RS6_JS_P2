@@ -1,7 +1,6 @@
 <h1>{{ title }}</h1>
 
 <section class="product-form">
-  <!-- TODO: 1. Add file upload? -->
   <form
     [formGroup]="formProducts"
     (ngSubmit)="addOrUpdateProduct()"
@@ -278,7 +277,7 @@
         <td class="text-center">
           <a
             class="table-action btn btn-light text-danger"
-            (click)="removeProduct(product.id!)"
+            (click)="confirmRemoval(product.id!)"
             ><i class="fa-regular fa-square-minus"></i
           ></a>
           <a
