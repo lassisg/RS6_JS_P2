@@ -51,8 +51,9 @@ export class LoginComponent implements OnInit {
 
 
   logUserIn() {
+    console.log(this.formLogin.value);
 
-    this.authService.login(this.user.email, this.user.password)
+    this.authService.login(this.formLogin.value)
       .subscribe({
         next: response => {
           console.log(response);

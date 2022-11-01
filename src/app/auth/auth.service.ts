@@ -27,10 +27,10 @@ export class AuthService {
     return this.userSubject.asObservable();
   }
 
-  login(email: string, password: string) {
+  login(user: User) {
 
     return this.http.get<User[]>(
-      `${this.urlAPI}?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}&active=true`,
+      `${this.urlAPI}?email=${encodeURIComponent(user.email)}&password=${encodeURIComponent(user.password)}&active=true`,
       { observe: 'response' })
       .pipe(map(user => {
         localStorage.setItem('user', JSON.stringify(user.body?.at(0)!));

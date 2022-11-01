@@ -10,13 +10,12 @@
   </button>
 </div>
 
-<div class="modal-body">
-  <form [formGroup]="formLogin">
+<form [formGroup]="formLogin" (ngSubmit)="logUserIn()">
+  <div class="modal-body">
     <div class="mb-3 row">
       <label for="email" class="form-label col-sm-2">Email: </label>
       <div class="col-sm-10">
         <input
-          [(ngModel)]="user.email"
           type="email"
           name="email"
           id="email"
@@ -31,7 +30,6 @@
       <label for="password" class="col-sm-2 col-form-label">Senha: </label>
       <div class="col-sm-10">
         <input
-          [(ngModel)]="user.password"
           type="password"
           name="password"
           id="password"
@@ -40,25 +38,22 @@
         />
       </div>
     </div>
-  </form>
-  <p class="text-center border-top pt-4">
-    Não possui conta? Registe-se já! <br />
-    <span
-      ><a routerLink="/register" (click)="activeModal.dismiss('Cross click')"
-        >clique aqui</a
-      ></span
-    >
-  </p>
-</div>
+    <p class="text-center border-top pt-4">
+      Não possui conta? Registe-se já! <br />
+      <span
+        ><a routerLink="/register" (click)="activeModal.dismiss('Cross click')"
+          >clique aqui</a
+        ></span
+      >
+    </p>
+  </div>
 
-<div class="modal-footer">
-  <button
-    type="submit"
-    class="btn btn-outline-primary"
-    id="btLogin"
-    [disabled]="formLogin.invalid"
-    (click)="logUserIn()"
-  >
-    Validar
-  </button>
-</div>
+  <div class="modal-footer">
+    <input
+      type="submit"
+      value="Validar"
+      class="btn btn-outline-primary"
+      [disabled]="formLogin.invalid"
+    />
+  </div>
+</form>
