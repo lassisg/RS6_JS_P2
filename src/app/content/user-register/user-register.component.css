@@ -14,6 +14,6 @@
   color: #dc3545;
 }
 .col-form-label:after {
-  content: "*";
+  content: " *";
   color: #dc3545;
 }
