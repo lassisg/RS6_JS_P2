@@ -11,10 +11,10 @@
 </div>
 
 <form [formGroup]="formLogin" (ngSubmit)="logUserIn()">
-  <div class="modal-body">
-    <div class="mb-3 row">
-      <label for="email" class="form-label col-sm-2">Email: </label>
-      <div class="col-sm-10">
+  <div class="modal-body row">
+    <div class="row g-2">
+      <label for="email" class="col-2 col-form-label">Email: </label>
+      <div class="col">
         <input
           type="email"
           name="email"
@@ -24,11 +24,19 @@
           #emailInput
           ngbAutofocus
         />
+        <small
+          [ngClass]="
+            formLogin.get('email')?.touched && formLogin.get('email')?.invalid
+              ? 'invalid-feedback'
+              : 'invisible'
+          "
+          >Por favor informe um email válido.</small
+        >
       </div>
     </div>
-    <div class="mb-3 row">
-      <label for="password" class="col-sm-2 col-form-label">Senha: </label>
-      <div class="col-sm-10">
+    <div class="row g-2">
+      <label for="password" class="col-2 col-form-label">Senha: </label>
+      <div class="col">
         <input
           type="password"
           name="password"
@@ -36,16 +44,36 @@
           class="form-control"
           formControlName="password"
         />
+        <small
+          [ngClass]="
+            formLogin.get('password')?.touched &&
+            formLogin.get('password')?.invalid
+              ? 'invalid-feedback'
+              : 'invisible'
+          "
+          >Por favor informe uma senha válida (deve ter entre 3 e 20
+          caracteres).</small
+        >
+        <small
+          [ngClass]="
+            formLogin.invalid && invalidLogin ? 'invalid-feedback' : 'invisible'
+          "
+          >Credenciais inválidas.</small
+        >
       </div>
     </div>
-    <p class="text-center border-top pt-4">
-      Não possui conta? Registe-se já! <br />
-      <span
-        ><a routerLink="/register" (click)="activeModal.dismiss('Cross click')"
-          >clique aqui</a
-        ></span
-      >
-    </p>
+    <div class="row g-2 text-center">
+      <small>
+        Não possui conta?
+        <span
+          ><a
+            routerLink="/register"
+            (click)="activeModal.dismiss('Cross click')"
+            >Registe-se!</a
+          ></span
+        >
+      </small>
+    </div>
   </div>
 
   <div class="modal-footer">

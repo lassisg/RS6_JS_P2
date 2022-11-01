@@ -33,8 +33,10 @@ export class AuthService {
       `${this.urlAPI}?email=${encodeURIComponent(user.email)}&password=${encodeURIComponent(user.password)}&active=true`,
       { observe: 'response' })
       .pipe(map(user => {
-        localStorage.setItem('user', JSON.stringify(user.body?.at(0)!));
-        this.userSubject.next(user.body?.at(0)!);
+        if (user.body?.length! > 0) {
+          localStorage.setItem('user', JSON.stringify(user.body?.at(0)!));
+          this.userSubject.next(user.body?.at(0)!);
+        }
         return user;
       }));
   }

@@ -12,3 +12,6 @@
   content: " *";
   color: #dc3545;
 }
+.invisible {
+  display: none;
+}

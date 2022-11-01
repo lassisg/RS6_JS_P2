@@ -35,7 +35,6 @@ export class HeaderComponent implements OnInit {
 
   openLoginForm() {
     const modalRef = this.modalService.open(LoginComponent);
-    modalRef.componentInstance.user = this.user;
   }
 
   checkAdminRole() {
