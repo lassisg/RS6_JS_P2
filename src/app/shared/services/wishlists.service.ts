@@ -6,7 +6,7 @@ import { Wishlist } from '../models/wishlist';
 @Injectable({
   providedIn: 'root'
 })
-export class ServWishlistService {
+export class ServWishlistsService {
 
   private urlAPI = `${environment.apiUrl}/wishlist`;
 

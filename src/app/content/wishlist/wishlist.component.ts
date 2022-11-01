@@ -3,7 +3,7 @@ import { first } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Product } from 'src/app/shared/models/product';
 import { ProductsService } from 'src/app/shared/services/products.service';
-import { ServWishlistService } from 'src/app/shared/services/wishlist.service';
+import { ServWishlistsService } from 'src/app/shared/services/wishlists.service';
 import { User } from 'src/app/shared/models/user';
 import { Wishlist } from 'src/app/shared/models/wishlist';
 
@@ -21,7 +21,7 @@ export class WishlistComponent implements OnInit {
   wishlist!: Wishlist;
   erro: string = '';
 
-  constructor(private authService: AuthService, private servProducts: ProductsService, private servWishlist: ServWishlistService) {
+  constructor(private authService: AuthService, private servProducts: ProductsService, private servWishlist: ServWishlistsService) {
     this.authService.getUser().subscribe(user => {
       this.user = user;
       this.checkAdminRole();
@@ -70,16 +70,17 @@ export class WishlistComponent implements OnInit {
   removeStar(id: number) {
     this.wishlist.product_id = this.wishlist.product_id.filter(productId => productId !== id);
 
-    this.servWishlist.updateWishlist(this.wishlist.id, this.wishlist).subscribe({
-      next: resultado => {
-        console.log(`Produto editado! Id: ${resultado.id}`);
-        this.readProductData();
-      },
-      error: error => {
-        console.log("Ocorreu um erro!" + error);
-        this.erro = error;
-      }
-    });
+    this.servWishlist.updateWishlist(this.wishlist.id, this.wishlist)
+      .subscribe({
+        next: resultado => {
+          console.log(`Produto editado! Id: ${resultado.id}`);
+          this.readProductData();
+        },
+        error: error => {
+          console.log("Ocorreu um erro!" + error);
+          this.erro = error;
+        }
+      });
   }
 
   checkAdminRole() {

@@ -3,7 +3,7 @@ import { first } from 'rxjs/operators';
 import { AuthService } from 'src/app/auth/auth.service';
 import { Product } from 'src/app/shared/models/product';
 import { ProductsService } from 'src/app/shared/services/products.service';
-import { ServWishlistService } from 'src/app/shared/services/wishlist.service';
+import { ServWishlistsService } from 'src/app/shared/services/wishlists.service';
 import { User } from 'src/app/shared/models/user';
 import { Wishlist } from 'src/app/shared/models/wishlist';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -34,7 +34,7 @@ export class ProductsComponent implements OnInit {
   productOnLoad: number = 6;
   productStep: number = 3;
 
-  constructor(private modalService: NgbModal, private servProducts: ProductsService, private authService: AuthService, private servWishlist: ServWishlistService) {
+  constructor(private modalService: NgbModal, private servProducts: ProductsService, private authService: AuthService, private servWishlist: ServWishlistsService) {
     this.authService.getUser().subscribe(user => {
       this.user = user;
       this.checkAdminRole();
