@@ -20,6 +20,7 @@ import { LoginComponent } from './content/login/login.component';
 import { UserComponent } from './content/user/user.component';
 import { UserRegisterComponent } from './content/user-register/user-register.component';
 import { AlertComponent } from './common/alert/alert.component';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AlertComponent } from './common/alert/alert.component';
     LoginComponent,
     UserComponent,
     UserRegisterComponent,
-    AlertComponent
+    AlertComponent,
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule,
