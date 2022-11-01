@@ -23,3 +23,30 @@
 .featured-item:hover {
   border: 2px solid #cd0118;
 }
+
+.featured-item img {
+  width: 100%;
+  min-width: 300px;
+}
+
+@media (max-width: 768px) {
+  /* Carousel styles */
+  .carousel-caption h3 {
+    font-size: 43px;
+  }
+  /* Featured styles */
+  .featured h2 {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 576px) {
+  /* Carousel styles */
+  .carousel-caption h3 {
+    font-size: 34px;
+  }
+  /* Featured styles */
+  .featured h2 {
+    font-size: 21px;
+  }
+}
