@@ -20,13 +20,13 @@ export class AppComponent {
     router.events.subscribe((event: Event) => {
 
       if (event instanceof NavigationStart) {
-        console.log("Navigation started...");
+        // console.log("Navigation started...");
       }
       if (event instanceof NavigationEnd) {
-        console.log("Navigation ended...");
+        // console.log("Navigation ended...");
       }
       if (event instanceof NavigationError) {
-        console.log("Navigation error: ", event.error);
+        // console.log("Navigation error: ", event.error);
       }
     });
 
