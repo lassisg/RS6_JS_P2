@@ -8,7 +8,7 @@ import { Wishlist } from '../models/wishlist';
 })
 export class ServWishlistsService {
 
-  private urlAPI = `${environment.apiUrl}/wishlist`;
+  private urlAPI = `${environment.apiUrl}/wishlists`;
 
   constructor(private http: HttpClient) { }
 
@@ -26,10 +26,16 @@ export class ServWishlistsService {
     return this.http.put<Wishlist>(`${this.urlAPI}/${id}`, wishlist);
   }
 
-  deleteWishlistMissingProduct(productId: number) {
+  updateWishlistAfterProductRemoval(productId: number) {
     this.getAllWishlists().subscribe({
-      next: response => {
-        console.log(response);
+      next: (response) => {
+        let wishlists = response.body;
+
+        wishlists?.forEach(wishlist => {
+          wishlist.product_id = wishlist.product_id.filter(id => id !== productId);
+          console.log(wishlist);
+          this.updateWishlist(wishlist.id, wishlist).subscribe();
+        });
       }
     });
   }

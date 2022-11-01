@@ -7,6 +7,7 @@ import { ProductType } from 'src/app/shared/models/product-type';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertType } from 'src/app/shared/models/alert-type';
 import { AlertComponent } from 'src/app/common/alert/alert.component';
+import { ServWishlistsService } from 'src/app/shared/services/wishlists.service';
 
 @Component({
   selector: 'app-products-bo',
@@ -33,7 +34,7 @@ export class ProductsBoComponent implements OnInit {
   pageSize: number = 10;
   pageProducts: Product[] = [];
 
-  constructor(private servProducts: ProductsService, private servProductTypes: ProductTypesService, private modalService: NgbModal) {
+  constructor(private servProducts: ProductsService, private servProductTypes: ProductTypesService, private servWishlists: ServWishlistsService, private modalService: NgbModal) {
   }
 
   ngOnInit(): void {
@@ -176,19 +177,16 @@ export class ProductsBoComponent implements OnInit {
       });
   }
 
+  // TODO: 3. Show modal before execution
   removeProduct(id: number) {
     let productName = this.products.find(p => p.id === id)?.name;
     this.servProducts.deleteProduct(id).subscribe({
       next: () => {
         console.log(`'${productName}' eliminado`);
-        this.removeProductFromWishlists(id);
+        this.servWishlists.updateWishlistAfterProductRemoval(id);
         this.readProductData();
       }
     });
-  }
-
-  removeProductFromWishlists(id: number) {
-
   }
 
   fillForm(product: Product) {

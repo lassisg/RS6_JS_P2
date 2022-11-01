@@ -31,7 +31,6 @@ export class ProductsService {
     return this.http.put<Product>(`${this.urlAPI}/${productId}`, product);
   }
 
-  // TODO: 1. Propagate delete, removing from wishlists
   deleteProduct(id: number) {
     return this.http.delete<Product>(`${this.urlAPI}/${id}`);
   }
