@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,34 +22,27 @@ import { UserRegisterComponent } from './content/user-register/user-register.com
 import { AlertComponent } from './components/alert/alert.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    FooterComponent,
-    HomeComponent,
-    ErrorComponent,
-    ProductsComponent,
-    ProductDetailComponent,
-    WishlistComponent,
-    ProductsBoComponent,
-    UsersComponent,
-    LoginComponent,
-    UserComponent,
-    UserRegisterComponent,
-    AlertComponent,
-    ConfirmationComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    NgbModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
-  entryComponents: [LoginComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        HeaderComponent,
+        FooterComponent,
+        HomeComponent,
+        ErrorComponent,
+        ProductsComponent,
+        ProductDetailComponent,
+        WishlistComponent,
+        ProductsBoComponent,
+        UsersComponent,
+        LoginComponent,
+        UserComponent,
+        UserRegisterComponent,
+        AlertComponent,
+        ConfirmationComponent
+    ],
+    bootstrap: [AppComponent],
+    entryComponents: [LoginComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        NgbModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
