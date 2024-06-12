@@ -22,7 +22,8 @@ import { UserRegisterComponent } from './content/user-register/user-register.com
 import { AlertComponent } from './components/alert/alert.component';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
-@NgModule({ declarations: [
+@NgModule({
+    declarations: [
         AppComponent,
         HeaderComponent,
         FooterComponent,
@@ -40,9 +41,13 @@ import { ConfirmationComponent } from './components/confirmation/confirmation.co
         ConfirmationComponent
     ],
     bootstrap: [AppComponent],
-    entryComponents: [LoginComponent], imports: [BrowserModule,
+    imports: [
+        BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         ReactiveFormsModule,
-        NgbModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        NgbModule
+    ],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+})
 export class AppModule { }
