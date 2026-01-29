@@ -11,9 +11,10 @@ import { ServWishlistsService } from 'src/app/shared/services/wishlists.service'
 import { ConfirmationComponent } from 'src/app/components/confirmation/confirmation.component';
 
 @Component({
-  selector: 'app-products-bo',
-  templateUrl: './products-bo.component.html',
-  styleUrls: ['./products-bo.component.css']
+    selector: 'app-products-bo',
+    templateUrl: './products-bo.component.html',
+    styleUrls: ['./products-bo.component.css'],
+    standalone: false
 })
 export class ProductsBoComponent implements OnInit {
 

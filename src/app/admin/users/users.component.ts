@@ -6,9 +6,10 @@ import { User } from 'src/app/shared/models/user';
 import { UsersService } from 'src/app/shared/services/users.service';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+    selector: 'app-users',
+    templateUrl: './users.component.html',
+    styleUrls: ['./users.component.css'],
+    standalone: false
 })
 export class UsersComponent implements OnInit {
 

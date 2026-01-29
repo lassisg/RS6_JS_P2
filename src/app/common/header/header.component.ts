@@ -6,9 +6,10 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from '../../components/login/login.component';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
+    selector: 'app-header',
+    templateUrl: './header.component.html',
+    styleUrls: ['./header.component.css'],
+    standalone: false
 })
 export class HeaderComponent implements OnInit {
   @Output() loginFormVisible: EventEmitter<boolean> = new EventEmitter();

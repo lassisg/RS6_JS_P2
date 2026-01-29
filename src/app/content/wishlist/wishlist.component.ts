@@ -8,9 +8,10 @@ import { User } from 'src/app/shared/models/user';
 import { Wishlist } from 'src/app/shared/models/wishlist';
 
 @Component({
-  selector: 'app-wishlist',
-  templateUrl: './wishlist.component.html',
-  styleUrls: ['./wishlist.component.css']
+    selector: 'app-wishlist',
+    templateUrl: './wishlist.component.html',
+    styleUrls: ['./wishlist.component.css'],
+    standalone: false
 })
 export class WishlistComponent implements OnInit {
 

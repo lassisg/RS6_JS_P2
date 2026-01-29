@@ -5,9 +5,10 @@ import { Location } from '@angular/common';
 import { UsersService } from 'src/app/shared/services/users.service';
 
 @Component({
-  selector: 'app-user-register',
-  templateUrl: './user-register.component.html',
-  styleUrls: ['./user-register.component.css']
+    selector: 'app-user-register',
+    templateUrl: './user-register.component.html',
+    styleUrls: ['./user-register.component.css'],
+    standalone: false
 })
 export class UserRegisterComponent implements OnInit {
 

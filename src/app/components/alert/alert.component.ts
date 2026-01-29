@@ -5,9 +5,10 @@ import { IAlert, AlertSuccess, AlertInfo, AlertWarning, AlertDanger } from '../.
 
 
 @Component({
-  selector: 'app-modal',
-  templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.css']
+    selector: 'app-modal',
+    templateUrl: './alert.component.html',
+    styleUrls: ['./alert.component.css'],
+    standalone: false
 })
 export class AlertComponent {
   @Input() alert!: IAlert;

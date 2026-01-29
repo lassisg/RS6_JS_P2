@@ -4,9 +4,10 @@ import { AuthService } from './auth/auth.service';
 import { User } from './shared/models/user';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.css'],
+    standalone: false
 })
 
 export class AppComponent {
