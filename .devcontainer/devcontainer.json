@@ -1,0 +1,26 @@
+{
+	"name": "Angular Dev Container",
+	"build": {
+		"dockerfile": "Dockerfile"
+	},
+
+	// Configura as permissões para o usuário 'node'
+	"remoteUser": "node",
+
+	// Encaminha a porta 4200 (padrão do Angular)
+	"forwardPorts": [4200],
+
+	// Configurações específicas do VS Code
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"angular.ng-template",
+				"dbaeumer.vscode-eslint",
+				"esbenp.prettier-vscode"
+			]
+		}
+	},
+
+	// Comandos para rodar após a criação do container
+	"postCreateCommand": "npm install"
+}
