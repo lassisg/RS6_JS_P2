@@ -5,7 +5,7 @@
     [formGroup]="formProducts"
     (ngSubmit)="addOrUpdateProduct()"
     class="row my-3 ps-2 pb-2"
-  >
+    >
     <div class="row g-2">
       <label for="name" class="col-2 col-md-3 col-form-label">Produto:</label>
       <div class="col">
@@ -19,7 +19,7 @@
             formProducts.get('name')?.touched &&
             formProducts.get('name')?.invalid
           "
-        />
+          />
         <small
           [ngClass]="
             formProducts.get('name')?.touched &&
@@ -29,276 +29,289 @@
           "
           >Por favor informe um nome válido (deve ter entre 3 e 50
           caracteres).</small
-        >
+          >
+        </div>
       </div>
-    </div>
 
-    <div class="row g-2">
-      <label for="brand" class="col-2 col-md-3 col-form-label">Marca:</label>
-      <div class="col">
-        <input
-          type="text"
-          name="brand"
-          id="brand"
-          class="form-control"
-          formControlName="brand"
+      <div class="row g-2">
+        <label for="brand" class="col-2 col-md-3 col-form-label">Marca:</label>
+        <div class="col">
+          <input
+            type="text"
+            name="brand"
+            id="brand"
+            class="form-control"
+            formControlName="brand"
           [class.invalid]="
             formProducts.get('brand')?.touched &&
             formProducts.get('brand')?.invalid
           "
-        />
-        <small
+            />
+          <small
           [ngClass]="
             formProducts.get('brand')?.touched &&
             formProducts.get('brand')?.invalid
               ? 'invalid-feedback'
               : 'invisible'
           "
-          >Por favor informe uma marca válida (deve ter entre 3 e 50
-          caracteres).</small
-        >
-      </div>
-    </div>
+            >Por favor informe uma marca válida (deve ter entre 3 e 50
+            caracteres).</small
+            >
+          </div>
+        </div>
 
-    <div class="row g-2">
-      <label for="type" class="col-2 col-md-3 col-form-label">Tipo</label>
-      <div class="col">
-        <select
-          name="type"
-          id="type"
-          class="form-select"
-          formControlName="product_type"
+        <div class="row g-2">
+          <label for="type" class="col-2 col-md-3 col-form-label">Tipo</label>
+          <div class="col">
+            <select
+              name="type"
+              id="type"
+              class="form-select"
+              formControlName="product_type"
           [class.invalid]="
             formProducts.get('product_type')?.touched &&
             formProducts.get('product_type')?.invalid
           "
-        >
-          <option value="" disabled selected>
-            -- Selecionar um tipo de produto --
-          </option>
-          <option *ngFor="let type of productTypes" value="{{ type.name }}">
-            {{ type.name }}
-          </option>
-        </select>
-        <small
+              >
+              <option value="" disabled selected>
+                -- Selecionar um tipo de produto --
+              </option>
+              @for (type of productTypes; track type) {
+                <option value="{{ type.name }}">
+                  {{ type.name }}
+                </option>
+              }
+            </select>
+            <small
           [ngClass]="
             formProducts.get('product_type')?.touched &&
             formProducts.get('product_type')?.invalid
               ? 'invalid-feedback'
               : 'invisible'
           "
-          >Por favor uma opção válida.</small
-        >
-      </div>
-    </div>
+              >Por favor uma opção válida.</small
+              >
+            </div>
+          </div>
 
-    <div class="row g-2">
-      <label for="color" class="col-2 col-md-3 col-form-label">Cor:</label>
-      <div class="col">
-        <input
-          type="text"
-          name="color"
-          id="color"
-          class="form-control"
-          formControlName="color"
+          <div class="row g-2">
+            <label for="color" class="col-2 col-md-3 col-form-label">Cor:</label>
+            <div class="col">
+              <input
+                type="text"
+                name="color"
+                id="color"
+                class="form-control"
+                formControlName="color"
           [class.invalid]="
             formProducts.get('color')?.touched &&
             formProducts.get('color')?.invalid
           "
-        />
-        <small
+                />
+              <small
           [ngClass]="
             formProducts.get('color')?.touched &&
             formProducts.get('color')?.invalid
               ? 'invalid-feedback'
               : 'invisible'
           "
-          >Por favor informe uma cor válida (deve ter entre 3 e 20
-          caracteres).</small
-        >
-      </div>
-    </div>
+                >Por favor informe uma cor válida (deve ter entre 3 e 20
+                caracteres).</small
+                >
+              </div>
+            </div>
 
-    <div class="row g-2">
-      <label for="price" class="col-2 col-md-3 col-form-label">Preço:</label>
-      <div class="col">
-        <input
-          type="number"
-          name="price"
-          id="price"
-          class="form-control"
-          formControlName="price"
+            <div class="row g-2">
+              <label for="price" class="col-2 col-md-3 col-form-label">Preço:</label>
+              <div class="col">
+                <input
+                  type="number"
+                  name="price"
+                  id="price"
+                  class="form-control"
+                  formControlName="price"
           [class.invalid]="
             formProducts.get('price')?.touched &&
             formProducts.get('price')?.invalid
           "
-        />
-        <small
+                  />
+                <small
           [ngClass]="
             formProducts.get('price')?.touched &&
             formProducts.get('price')?.invalid
               ? 'invalid-feedback'
               : 'invisible'
           "
-          >Por favor informe um preço válido (de ser maior que 0).</small
-        >
-      </div>
-    </div>
+                  >Por favor informe um preço válido (de ser maior que 0).</small
+                  >
+                </div>
+              </div>
 
-    <div class="row g-2">
-      <label for="description" class="col-2 col-md-3 col-form-label"
-        >Descrição:</label
-      >
-      <div class="col">
-        <textarea
-          name="description"
-          id="description"
-          class="form-control"
-          rows="3"
-          formControlName="description"
+              <div class="row g-2">
+                <label for="description" class="col-2 col-md-3 col-form-label"
+                  >Descrição:</label
+                  >
+                  <div class="col">
+                    <textarea
+                      name="description"
+                      id="description"
+                      class="form-control"
+                      rows="3"
+                      formControlName="description"
           [class.invalid]="
             formProducts.get('description')?.touched &&
             formProducts.get('description')?.invalid
           "
-        ></textarea>
-        <small
+                    ></textarea>
+                    <small
           [ngClass]="
             formProducts.get('description')?.touched &&
             formProducts.get('description')?.invalid
               ? 'invalid-feedback'
               : 'invisible'
           "
-          >Por favor informe uma descrição válida (deve ter entre 3 e 250
-          caracteres).</small
-        >
-      </div>
-    </div>
+                      >Por favor informe uma descrição válida (deve ter entre 3 e 250
+                      caracteres).</small
+                      >
+                    </div>
+                  </div>
 
-    <div class="row g-2">
-      <div class="col-2 col-sm-3"></div>
-      <div class="col form-check form-switch">
-        <input
-          type="checkbox"
-          role="switch"
-          name="featured"
-          id="featured"
-          class="form-check-input"
-          formControlName="featured"
-        />
-        <label class="form-check-label ms-2" for="featured">Destaque</label>
-      </div>
-    </div>
+                  <div class="row g-2">
+                    <div class="col-2 col-sm-3"></div>
+                    <div class="col form-check form-switch">
+                      <input
+                        type="checkbox"
+                        role="switch"
+                        name="featured"
+                        id="featured"
+                        class="form-check-input"
+                        formControlName="featured"
+                        />
+                      <label class="form-check-label ms-2" for="featured">Destaque</label>
+                    </div>
+                  </div>
 
-    <div class="row g-2 text-right">
-      <div class="col"></div>
-      <div class="col-auto">
-        <input
-          type="submit"
-          value="{{ isNew ? 'Inserir' : 'Alterar' }} produto"
-          class="btn btn-primary text-right"
-          [disabled]="formProducts.invalid"
-        />
-      </div>
-    </div>
-  </form>
-</section>
+                  <div class="row g-2 text-right">
+                    <div class="col"></div>
+                    <div class="col-auto">
+                      <input
+                        type="submit"
+                        value="{{ isNew ? 'Inserir' : 'Alterar' }} produto"
+                        class="btn btn-primary text-right"
+                        [disabled]="formProducts.invalid"
+                        />
+                    </div>
+                  </div>
+                </form>
+              </section>
 
-<section class="product-search my-4">
-  <div class="d-flex align-items-center">
-    <label for="pesquisa" class="flex-shrink-0 me-2">Pesquisa:</label>
-    <input
-      type="text"
-      id="pesquisa"
-      class="form-control flex-grow-1 me-2"
-      placeholder="Pesquisa de produto"
-      #searchTerm
-      (input)="searchProduct(searchTerm.value)"
-    />
-  </div>
-</section>
+              <section class="product-search my-4">
+                <div class="d-flex align-items-center">
+                  <label for="pesquisa" class="flex-shrink-0 me-2">Pesquisa:</label>
+                  <input
+                    type="text"
+                    id="pesquisa"
+                    class="form-control flex-grow-1 me-2"
+                    placeholder="Pesquisa de produto"
+                    #searchTerm
+                    (input)="searchProduct(searchTerm.value)"
+                    />
+                </div>
+              </section>
 
-<section class="product-list">
-  <h2>Lista de Produtos</h2>
+              <section class="product-list">
+                <h2>Lista de Produtos</h2>
 
-  <p *ngIf="products.length === 0 && searchTerm.value === ''">
-    Não existem produtos na base de dados!
-  </p>
-  <p *ngIf="products.length === 0 && searchTerm.value !== ''">
-    Não existem produtos com o critério especificado!
-  </p>
+                @if (products.length === 0 && searchTerm.value === '') {
+                  <p>
+                    Não existem produtos na base de dados!
+                  </p>
+                }
+                @if (products.length === 0 && searchTerm.value !== '') {
+                  <p>
+                    Não existem produtos com o critério especificado!
+                  </p>
+                }
 
-  <table
-    class="table table-light caption-top"
-    *ngIf="pageProducts.length !== 0"
-  >
-    <caption>
-      Total de produtos:
-      {{
-        searchTerm.value.length > 0 ? searchResult.length : products.length
-      }}
-    </caption>
-    <thead class="">
-      <tr>
-        <th class="align-middle"><span>Foto</span></th>
-        <th class="align-middle"><span>Marca</span></th>
-        <th class="align-middle"><span>Produto</span></th>
-        <th class="align-middle"><span>Tipo produto</span></th>
-        <th class="align-middle"><span>Cor</span></th>
-        <th class="align-middle product-price"><span>Preço</span></th>
-        <th class="align-middle"><span>Descrição</span></th>
-        <th class="align-middle"><span>Destaque</span></th>
-        <th class="align-middle"><span>Operações</span></th>
-      </tr>
-    </thead>
-    <tbody class="table-group-divider">
-      <tr *ngFor="let product of pageProducts" id="{{ product.id }}">
-        <td class="product-image">
-          <img
-            class="img-thumbnail image-main"
-            src="/assets/{{ product.photo_primary }}"
-            alt=""
-          />
-          <img
-            class="img-thumbnail image-hover"
-            src="/assets/{{ product.photo_secondary }}"
-            alt=""
-          />
-        </td>
-        <td>{{ product.brand }}</td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.product_type }}</td>
-        <td>{{ product.color }}</td>
-        <td class="text-end product-price">{{ product.price }} &euro;</td>
-        <td>{{ product.description }}</td>
-        <td class="text-center pt-3">
-          <i *ngIf="product.featured" class="fa fa-check"></i>
-          <i *ngIf="!product.featured" class="fa fa-x"></i>
-        </td>
-        <td class="text-center">
-          <a
-            class="table-action btn btn-light text-danger"
-            (click)="confirmRemoval(product.id!)"
-            ><i class="fa-regular fa-square-minus"></i
-          ></a>
-          <a
-            class="table-action btn btn-light text-primary"
-            (click)="fillForm(product)"
-            ><i class="fa-regular fa-pen-to-square"></i
-          ></a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+                @if (pageProducts.length !== 0) {
+                  <table
+                    class="table table-light caption-top"
+                    >
+                    <caption>
+                      Total de produtos:
+                      {{
+                      searchTerm.value.length > 0 ? searchResult.length : products.length
+                      }}
+                    </caption>
+                    <thead class="">
+                      <tr>
+                        <th class="align-middle"><span>Foto</span></th>
+                        <th class="align-middle"><span>Marca</span></th>
+                        <th class="align-middle"><span>Produto</span></th>
+                        <th class="align-middle"><span>Tipo produto</span></th>
+                        <th class="align-middle"><span>Cor</span></th>
+                        <th class="align-middle product-price"><span>Preço</span></th>
+                        <th class="align-middle"><span>Descrição</span></th>
+                        <th class="align-middle"><span>Destaque</span></th>
+                        <th class="align-middle"><span>Operações</span></th>
+                      </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                      @for (product of pageProducts; track product) {
+                        <tr id="{{ product.id }}">
+                          <td class="product-image">
+                            <img
+                              class="img-thumbnail image-main"
+                              src="/assets/{{ product.photo_primary }}"
+                              alt=""
+                              />
+                            <img
+                              class="img-thumbnail image-hover"
+                              src="/assets/{{ product.photo_secondary }}"
+                              alt=""
+                              />
+                          </td>
+                          <td>{{ product.brand }}</td>
+                          <td>{{ product.name }}</td>
+                          <td>{{ product.product_type }}</td>
+                          <td>{{ product.color }}</td>
+                          <td class="text-end product-price">{{ product.price }} &euro;</td>
+                          <td>{{ product.description }}</td>
+                          <td class="text-center pt-3">
+                            @if (product.featured) {
+                              <i class="fa fa-check"></i>
+                            }
+                            @if (!product.featured) {
+                              <i class="fa fa-x"></i>
+                            }
+                          </td>
+                          <td class="text-center">
+                            <a
+                              class="table-action btn btn-light text-danger"
+                              (click)="confirmRemoval(product.id!)"
+                              ><i class="fa-regular fa-square-minus"></i
+                            ></a>
+                            <a
+                              class="table-action btn btn-light text-primary"
+                              (click)="fillForm(product)"
+                              ><i class="fa-regular fa-pen-to-square"></i
+                            ></a>
+                          </td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                }
 
-  <div class="d-flex justify-content-end p-2">
-    <ngb-pagination
+                <div class="d-flex justify-content-end p-2">
+                  <ngb-pagination
       [collectionSize]="
         searchTerm.value.length > 0 ? searchResult.length : products.length
       "
-      [(page)]="page"
-      [pageSize]="pageSize"
-      (pageChange)="refreshProducts()"
-    >
-    </ngb-pagination>
-  </div>
-</section>
+                    [(page)]="page"
+                    [pageSize]="pageSize"
+                    (pageChange)="refreshProducts()"
+                    >
+                  </ngb-pagination>
+                </div>
+              </section>

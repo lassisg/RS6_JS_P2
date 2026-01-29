@@ -3,36 +3,40 @@
     <div class="card mb-3">
       <div class="card-header card-header-red text-center">Tipo</div>
       <div class="card-body">
-        <p *ngFor="let productType of productTypes" class="card-text my-1">
-          <input
-            (change)="filterProducts($event)"
-            class="form-check-input"
-            type="checkbox"
-            data-type="tipo_de_produto"
-            value="{{ productType }}"
-          />
-          <label class="form-check-label ms-2" for="defaultCheck1">
-            {{ productType }}
-          </label>
-        </p>
+        @for (productType of productTypes; track productType) {
+          <p class="card-text my-1">
+            <input
+              (change)="filterProducts($event)"
+              class="form-check-input"
+              type="checkbox"
+              data-type="tipo_de_produto"
+              value="{{ productType }}"
+              />
+            <label class="form-check-label ms-2" for="defaultCheck1">
+              {{ productType }}
+            </label>
+          </p>
+        }
       </div>
     </div>
 
     <div class="card">
       <div class="card-header card-header-red text-center">Cor</div>
       <div class="card-body">
-        <p *ngFor="let productColor of productColors" class="card-text my-1">
-          <input
-            (change)="filterProducts($event)"
-            class="form-check-input"
-            type="checkbox"
-            data-type="cor"
-            value="{{ productColor }}"
-          />
-          <label class="form-check-label ms-2" for="defaultCheck1">
-            {{ productColor }}
-          </label>
-        </p>
+        @for (productColor of productColors; track productColor) {
+          <p class="card-text my-1">
+            <input
+              (change)="filterProducts($event)"
+              class="form-check-input"
+              type="checkbox"
+              data-type="cor"
+              value="{{ productColor }}"
+              />
+            <label class="form-check-label ms-2" for="defaultCheck1">
+              {{ productColor }}
+            </label>
+          </p>
+        }
       </div>
     </div>
   </section>
@@ -46,50 +50,54 @@
     </p>
 
     <div class="d-flex flex-row flex-wrap justify-content-evenly">
-      <div
-        *ngFor="let product of filteredProducts"
-        class="product-image m-2 mx-4"
-      >
-        <span
-          *ngIf="wishlist && !wishlist.product_id.includes(product.id)"
-          (click)="addStar(product.id)"
-          class="star px-2 py-1"
-          ><i class="far fa-star"></i
-        ></span>
-        <span
-          *ngIf="wishlist && wishlist.product_id.includes(product.id)"
-          (click)="addStar(product.id)"
-          class="star px-2 py-1"
-          ><i class="fas fa-star"></i
-        ></span>
-        <a routerLink="/product/{{ product.id }}">
-          <img
-            class="image-main"
-            src="/assets/{{ product.photo_primary }}"
-            alt="{{ product.name }}"
-          />
-          <img
-            class="image-hover"
-            src="/assets/{{ product.photo_secondary }}"
-            alt="{{ product.name }}"
-          />
-        </a>
-        <p class="product-brand text-center mx-auto mt-4">
-          {{ product.brand }}
-        </p>
-        <p class="product-name text-center mx-auto">{{ product.name }}</p>
-        <p class="product-price text-center mx-auto">
-          {{ product.price }} &euro;
-        </p>
-      </div>
+      @for (product of filteredProducts; track product) {
+        <div
+          class="product-image m-2 mx-4"
+          >
+          @if (wishlist && !wishlist.product_id.includes(product.id)) {
+            <span
+              (click)="addStar(product.id)"
+              class="star px-2 py-1"
+              ><i class="far fa-star"></i
+            ></span>
+          }
+          @if (wishlist && wishlist.product_id.includes(product.id)) {
+            <span
+              (click)="addStar(product.id)"
+              class="star px-2 py-1"
+              ><i class="fas fa-star"></i
+            ></span>
+          }
+          <a routerLink="/product/{{ product.id }}">
+            <img
+              class="image-main"
+              src="/assets/{{ product.photo_primary }}"
+              alt="{{ product.name }}"
+              />
+            <img
+              class="image-hover"
+              src="/assets/{{ product.photo_secondary }}"
+              alt="{{ product.name }}"
+              />
+          </a>
+          <p class="product-brand text-center mx-auto mt-4">
+            {{ product.brand }}
+          </p>
+          <p class="product-name text-center mx-auto">{{ product.name }}</p>
+          <p class="product-price text-center mx-auto">
+            {{ product.price }} &euro;
+          </p>
+        </div>
+      }
     </div>
 
-    <button
-      *ngIf="products.length < productCount"
-      class="btn btn-dark col-12"
-      (click)="getNext()"
-    >
-      Ver mais
-    </button>
+    @if (products.length < productCount) {
+      <button
+        class="btn btn-dark col-12"
+        (click)="getNext()"
+        >
+        Ver mais
+      </button>
+    }
   </section>
 </div>

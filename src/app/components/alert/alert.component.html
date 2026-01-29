@@ -2,15 +2,16 @@
   <h4 class="alert-heading">
     <span class="me-2"
       ><i class="fa-solid" [ngClass]="getFaIconClass()"></i></span
-    >{{ alert.title }}
-  </h4>
-  <p>
-    {{ alert.message }}
-  </p>
-  <button
-    *ngIf="alert.dismissible || this.alert.delay === 0"
-    type="button"
-    class="btn btn-close"
-    (click)="activeModal.close()"
-  ></button>
-</div>
+      >{{ alert.title }}
+    </h4>
+    <p>
+      {{ alert.message }}
+    </p>
+    @if (alert.dismissible || this.alert.delay === 0) {
+      <button
+        type="button"
+        class="btn btn-close"
+        (click)="activeModal.close()"
+      ></button>
+    }
+  </div>

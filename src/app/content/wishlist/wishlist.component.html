@@ -1,27 +1,26 @@
 <section class="wish-list px-3">
   <h1 class="text-center mb-4">{{ title }}</h1>
-  <div
-    class="product-list py-4 d-flex align-items-center justify-content-center"
-    *ngFor="let product of products"
-  >
-    <img
-      class="image-main me-4"
-      src="/assets/{{ product.photo_primary }}"
-      alt="{{ product.name }}"
-    />
-
-    <div class="product-info mx-4 px-4">
-      <h4 class="text-center mx-auto">{{ product.brand }}</h4>
-      <p class="text-center mx-auto product-name">{{ product.name }}</p>
-      <p class="text-center mx-auto product-price">
-        {{ product.price }} &euro;
-      </p>
+  @for (product of products; track product) {
+    <div
+      class="product-list py-4 d-flex align-items-center justify-content-center"
+      >
+      <img
+        class="image-main me-4"
+        src="/assets/{{ product.photo_primary }}"
+        alt="{{ product.name }}"
+        />
+      <div class="product-info mx-4 px-4">
+        <h4 class="text-center mx-auto">{{ product.brand }}</h4>
+        <p class="text-center mx-auto product-name">{{ product.name }}</p>
+        <p class="text-center mx-auto product-price">
+          {{ product.price }} &euro;
+        </p>
+      </div>
+      <div class="actions ms-4">
+        <button class="btn btn-danger" (click)="removeStar(product.id)">
+          Remover
+        </button>
+      </div>
     </div>
-
-    <div class="actions ms-4">
-      <button class="btn btn-danger" (click)="removeStar(product.id)">
-        Remover
-      </button>
-    </div>
-  </div>
+  }
 </section>
